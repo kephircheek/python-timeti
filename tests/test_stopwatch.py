@@ -68,6 +68,3 @@ class TestStopwatch(unittest.TestCase):
             f'{int(round(sw.clockface.miliseconds, -2))} ms',
             '1 m 6 s 600 ms'
         )
-
-
-
