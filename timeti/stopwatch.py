@@ -13,7 +13,7 @@ class Stopwatch:
     def __init__(self):
         self._start_time: float = time.time()
         self._onpause = False
-        self._laps: List[float] = []
+        self._laps: List[Clockface] = []
         self._pause_time: float = None
 
     def pause(self) -> Clockface:
@@ -40,13 +40,13 @@ class Stopwatch:
 
     def lap(self) -> Clockface:
         """Save time of lap."""
-        self._laps.append(self.timestamp - sum(self._laps))
+        self._laps.append(Clockface(self.timestamp - sum(self._laps, Clockface(0)).timestamp))
         if self._onpause:
             warnings.warn("Stopwatch paused")
-        return Clockface(self._laps[-1])
+        return self._laps[-1]
 
     @property
-    def laps(self) -> List[float]:
+    def laps(self) -> List[Clockface]:
         """List of lap time span."""
         return self._laps
 

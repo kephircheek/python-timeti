@@ -10,7 +10,7 @@ class TestStopwatch(unittest.TestCase):
     def test_timestamp(self):
         sw = Stopwatch()
         sleep(0.01)
-        self.assertGreater(round(sw.timestamp, 3), 0.01)
+        self.assertGreaterEqual(round(sw.timestamp, 3), 0.01)
         self.assertLess(round(sw.timestamp, 3), 0.015)
 
     def test_pause_play(self):
@@ -30,7 +30,7 @@ class TestStopwatch(unittest.TestCase):
         sleep(0.02)
         sw.lap()
         self.assertEqual(len(sw.laps), 3)
-        self.assertLess(round(sum(sw.laps), 3), 0.04)
+        self.assertLess(round(sum(sw.laps).timestamp, 3), 0.04)
 
     def test_reset(self):
         sw = Stopwatch()
@@ -42,7 +42,7 @@ class TestStopwatch(unittest.TestCase):
         sleep(0.02)
         sw.lap()
         self.assertLess(round(sw.timestamp, 3), 0.03)
-        self.assertLess(round(sum(sw.laps), 3), 0.03)
+        self.assertLess(round(sum(sw.laps).timestamp, 3), 0.03)
 
     def test_double_pause(self):
         sw = Stopwatch()
@@ -67,7 +67,7 @@ class TestStopwatch(unittest.TestCase):
         sw.lap()
         sw.lap()
         self.assertEqual(len(sw.laps), 4)
-        self.assertLess(round(sum(sw.laps), 3), 0.02)
+        self.assertLess(round(sum(sw.laps).timestamp, 3), 0.02)
 
     def test_clockface(self):
         sw = Stopwatch()
@@ -75,6 +75,6 @@ class TestStopwatch(unittest.TestCase):
         self.assertEqual(
             f"{int(sw.clockface.minutes)} m "
             f"{int(sw.clockface.seconds)} s "
-            f"{int(round(sw.clockface.miliseconds, -2))} ms",
+            f"{int(round(sw.clockface.milliseconds, -2))} ms",
             "1 m 7 s 700 ms",
         )

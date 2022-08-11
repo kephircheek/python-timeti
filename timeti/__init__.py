@@ -3,10 +3,14 @@ Serialize elapsed time of functions, loops and code blocks.
 
 Copyright 2022 Ilia Lazarev
 """
-from functools import wraps
+
+__all__ = ["Stopwatch", "Clockface", "timing", "totime", "timer"]
+
 from contextlib import contextmanager
+from functools import wraps
 from typing import Callable
 
+from timeti.clockface import Clockface
 from timeti.stopwatch import Stopwatch
 
 
@@ -29,24 +33,24 @@ def totime(items, name: str = None, serialize: Callable = None):
     sw = Stopwatch()
     for i, item in enumerate(items):
         yield sw, item
-        lap = sw.lap()
+        sw.lap()
         with sw.paused():
             if serialize is not None:
-                serialize(sw, name, indx)
+                serialize(sw, name, i)
             else:
                 lap = sw.laps[-1]
                 print(f"Elapsed time of{mention}loop iteration {i}: {lap}")
 
     sw.pause()
     if serialize is not None:
-        serialize(sw, name, indx)
+        serialize(sw, name, i)
     else:
         print(f"Elapsed time of{mention}loop: {sw.clockface}")
 
 
-
 def timer(serialize: Callable = None):
     """Serialize elapsed time of funciton (decorator)."""
+
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):

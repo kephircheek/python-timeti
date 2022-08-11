@@ -1,5 +1,9 @@
 """Simple formatter of timestamp."""
 
+from __future__ import annotations
+
+from typing import Union
+
 
 class Clockface:
     """
@@ -14,37 +18,50 @@ class Clockface:
 
     """
 
+    SPAN_MINUTE = 60
+    SPAN_HOUR = 60 * SPAN_MINUTE
+    SPAN_DAY = 24 * SPAN_HOUR
+
     def __init__(self, timestamp: float):
         self.__timestamp = timestamp
-        self.__minute_span = 60
-        self.__hour_span = 60 * self.__minute_span
-        self.__day_span = 24 * self.__hour_span
+
+    def __add__(self, other: Union[Clockface, float, int]):
+        if isinstance(other, (float, int)):
+            return Clockface(self.timestamp + other)
+        return Clockface(self.timestamp + other.timestamp)
+
+    __radd__ = __add__
+
+    @property
+    def timestamp(self):
+        """Return timestamp."""
+        return self.__timestamp
 
     @property
     def days(self):
         """Return integer part of days."""
-        return round(self.__timestamp // self.__day_span)
+        return round(self.__timestamp // self.SPAN_DAY)
 
     @property
     def hours(self):
         """Return integer part of hours."""
-        return (self.__timestamp - self.days * self.__day_span) // self.__hour_span
+        return (self.__timestamp - self.days * self.SPAN_DAY) // self.SPAN_HOUR
 
     @property
     def minutes(self):
         """Return integer part of minutes."""
         return (
-            self.__timestamp - self.days * self.__day_span - self.hours * self.__hour_span
-        ) // self.__minute_span
+            self.__timestamp - self.days * self.SPAN_DAY - self.hours * self.SPAN_HOUR
+        ) // self.SPAN_MINUTE
 
     @property
     def seconds(self):
         """Return integer part of seconds."""
         return int(
             self.__timestamp
-            - self.days * self.__day_span
-            - self.hours * self.__hour_span
-            - self.minutes * self.__minute_span
+            - self.days * self.SPAN_DAY
+            - self.hours * self.SPAN_HOUR
+            - self.minutes * self.SPAN_MINUTE
         )
 
     @property
@@ -76,7 +93,7 @@ class Clockface:
             f"{self.hours}h "
             f"{self.minutes}m "
             f"{self.seconds}s "
-            f"{self.miliseconds}ms"
+            f"{self.milliseconds}ms"
         )
 
 
