@@ -1,6 +1,7 @@
+"""Primitive stopwatch."""
 import time
-from contextlib import contextmanager
 import warnings
+from contextlib import contextmanager
 from typing import List
 
 from .clockface import Clockface
@@ -10,10 +11,10 @@ class Stopwatch:
     """Primitive stopwatch."""
 
     def __init__(self):
-        self._start_time = time.time()
+        self._start_time: float = time.time()
         self._onpause = False
-        self._laps = []
-        self._pause_time = None
+        self._laps: List[float] = []
+        self._pause_time: float = None
 
     def pause(self) -> Clockface:
         """Pause stopwatch."""
@@ -45,7 +46,7 @@ class Stopwatch:
         return Clockface(self._laps[-1])
 
     @property
-    def laps(self) -> List:
+    def laps(self) -> List[float]:
         """List of lap time span."""
         return self._laps
 
@@ -58,7 +59,6 @@ class Stopwatch:
         """Timestamp of stopwatch."""
         if self._onpause:
             return self._pause_time - self._start_time
-
         return time.time() - self._start_time
 
     @property

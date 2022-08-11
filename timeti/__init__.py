@@ -1,3 +1,8 @@
+"""
+Serialize elapsed time of functions, loops and code blocks.
+
+Copyright 2022 Ilia Lazarev
+"""
 from functools import wraps
 from contextlib import contextmanager
 from typing import Callable
@@ -41,9 +46,8 @@ def totime(items, name: str = None, serialize: Callable = None):
 
 
 def timer(serialize: Callable = None):
+    """Serialize elapsed time of funciton (decorator)."""
     def decorator(func):
-        """Logging elapsed time of funciton (decorator)."""
-
         @wraps(func)
         def wrapper(*args, **kwargs):
             with timing(func.__name__):

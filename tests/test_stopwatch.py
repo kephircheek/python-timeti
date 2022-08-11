@@ -5,8 +5,8 @@ from time import sleep
 
 from timeti.stopwatch import Stopwatch
 
-class TestStopwatch(unittest.TestCase):
 
+class TestStopwatch(unittest.TestCase):
     def test_timestamp(self):
         sw = Stopwatch()
         sleep(0.01)
@@ -73,8 +73,8 @@ class TestStopwatch(unittest.TestCase):
         sw = Stopwatch()
         sw._start_time = time.time() - 67.7
         self.assertEqual(
-            f'{int(sw.clockface.minutes)} m '
-            f'{int(sw.clockface.seconds)} s '
-            f'{int(round(sw.clockface.miliseconds, -2))} ms',
-            '1 m 7 s 700 ms'
+            f"{int(sw.clockface.minutes)} m "
+            f"{int(sw.clockface.seconds)} s "
+            f"{int(round(sw.clockface.miliseconds, -2))} ms",
+            "1 m 7 s 700 ms",
         )

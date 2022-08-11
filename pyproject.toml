@@ -9,8 +9,10 @@ authors = [
 [project.optional-dependencies]
 dev = [
     "mypy",
-    "isort",
-    "black"
+    "isort[colors]",
+    "black",
+    "pydocstyle",
+    "toml",
 ]
 
 [tool.black]
@@ -25,3 +27,12 @@ ignore_missing_imports = true
 
 [tool.isort]
 profile = "black"
+
+[tool.pydocstyle]
+ignore = [
+    "D105",
+    "D407",
+    "D212",
+    "D203",
+    "D107",
+]
