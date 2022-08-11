@@ -7,21 +7,22 @@ from .clockface import Clockface
 
 
 class Stopwatch:
+    """Primitive stopwatch."""
+
     def __init__(self):
-        """Primitive stopwatch."""
-        self.__start_time = time.time()
-        self.__onpause = False
-        self.__laps = []
-        self.__pause_time = None
+        self._start_time = time.time()
+        self._onpause = False
+        self._laps = []
+        self._pause_time = None
 
     def pause(self) -> Clockface:
         """Pause stopwatch."""
-        if not self.__onpause:
-            self.__onpause = True
-            self.__pause_time = time.time()
+        if not self._onpause:
+            self._onpause = True
+            self._pause_time = time.time()
         else:
             warnings.warn("Stopwatch already paused")
-        return Clockface(self.__pause_time)
+        return Clockface(self._pause_time)
 
     @contextmanager
     def paused(self):
@@ -32,21 +33,21 @@ class Stopwatch:
 
     def play(self):
         """Continue stopwatch after a pause."""
-        if self.__onpause:
-            self.__start_time += time.time() - self.__pause_time
-            self.__onpause = False
+        if self._onpause:
+            self._start_time += time.time() - self._pause_time
+            self._onpause = False
 
     def lap(self) -> Clockface:
         """Save time of lap."""
-        self.__laps.append(self.timestamp - sum(self.__laps))
-        if self.__onpause:
+        self._laps.append(self.timestamp - sum(self._laps))
+        if self._onpause:
             warnings.warn("Stopwatch paused")
-        return Clockface(self.__laps[-1])
+        return Clockface(self._laps[-1])
 
     @property
     def laps(self) -> List:
         """List of lap time span."""
-        return self.__laps
+        return self._laps
 
     def reset(self):
         """Reset stopwatch."""
@@ -55,10 +56,10 @@ class Stopwatch:
     @property
     def timestamp(self) -> float:
         """Timestamp of stopwatch."""
-        if self.__onpause:
-            return self.__pause_time - self.__start_time
+        if self._onpause:
+            return self._pause_time - self._start_time
 
-        return time.time() - self.__start_time
+        return time.time() - self._start_time
 
     @property
     def clockface(self) -> Clockface:
