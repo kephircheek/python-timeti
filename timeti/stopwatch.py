@@ -3,7 +3,7 @@ from contextlib import contextmanager
 import warnings
 from typing import List
 
-from .utils import Clockface
+from .clockface import Clockface
 
 
 class Stopwatch:
