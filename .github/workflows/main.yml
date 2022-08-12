@@ -4,15 +4,12 @@ on: [push]
 
 jobs:
   test:
+    name: Lint & Test
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: Get modified python files
-      id: files
-      run: echo "::set-output name=modified::$(echo $(git diff --name-only ${{ github.sha }} | grep \.py$))"
 
     - name: Set up Python 3.8
       uses: actions/setup-python@v1
@@ -24,19 +21,15 @@ jobs:
 
     - name: Analyse the code with black
       run: black . --check --verbose --diff --color
-      if: steps.files.outputs.modified
 
     - name: Analyse the documentation with pydocstyle
       run: pydocstyle timeti
-      if: steps.files.outputs.modified
 
     - name: Analyse types with mypy
       run: mypy timeti
-      if: steps.files.outputs.modified
 
     - name: Analyse imports with isort
       run: isort . --check --diff --color
-      if: steps.files.outputs.modified
 
     - name: Run doctests
       run: python -m doctest -v timeti/clockface.py 
