@@ -2,8 +2,8 @@ import time
 
 import timeti
 
-with timeti.timing("My context manager") as sw:
+with timeti.profiler("My context manager") as p:
     time.sleep(0.1)
-    print(sw.clockface.milliseconds)
+    print(p.sw.clockface.milliseconds)
     time.sleep(0.1)
-    print(sw.clockface.milliseconds)
+    print(p.sw.clockface.milliseconds)
