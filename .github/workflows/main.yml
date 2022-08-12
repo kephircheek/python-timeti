@@ -6,7 +6,6 @@ jobs:
   test:
     name: Lint & Test
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -39,3 +38,38 @@ jobs:
 
     - name: Run examples
       run: for f in examples/*.py; do echo "\n$f" && python "$f"; done
+
+
+  publish:
+    name: Upload to PyPi
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: | 
+        python -m pip install toml
+        python -m pip install build
+
+    - name: Compare package version and git tag
+      run: |
+        TAG=$(git describe --tags --abbrev=0)
+        VERSION=$(python -c "import toml; import pathlib; print(toml.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")
+        [[ $TAG == $VERSION ]] && echo "VALID=true" >> "$GITHUB_ENV" || echo "VALID=false" >> "$GITHUB_ENV"
+
+    - name: Build 
+      if: env.VALID == 'true'
+      run: python -m build
+
+    - name: Publish
+      if: env.VALID == 'true'
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secrets.PYPI_API_TOKEN }}
