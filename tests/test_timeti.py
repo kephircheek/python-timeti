@@ -23,6 +23,13 @@ class TestContextmanager(unittest.TestCase):
         msg = buffer.getvalue()
         self.assertTrue(msg.startswith("Elapsed time of block:"), msg=msg)
 
+    def test_mute_mode(self):
+        with stdout_string() as buffer:
+            with timeti.timing(verbose=False):
+                time.sleep(0.01)
+        msg = buffer.getvalue()
+        self.assertEqual(msg, "")
+
 
 class TestLoop(unittest.TestCase):
     def test_unnamed_default_serialize_message(self):
@@ -48,6 +55,14 @@ class TestLoop(unittest.TestCase):
                 time.sleep(delay)
                 self.assertLess(sw.clockface.milliseconds, 40)
 
+    def test_mute_mode(self):
+        with stdout_string() as buffer:
+            with timeti.timing(verbose=False):
+                for inx in timeti.totime(range(3), verbose=False):
+                    time.sleep(inx / 100)
+        msg = buffer.getvalue()
+        self.assertEqual(msg, "")
+
 
 class TestDecorator(unittest.TestCase):
     def test_unnamed_default_serialize_message(self):
@@ -60,3 +75,14 @@ class TestDecorator(unittest.TestCase):
 
         msg = buffer.getvalue()
         self.assertTrue(msg.startswith("Elapsed time of 'wait' function:"), msg=msg)
+
+    def test_mute_mode(self):
+        @timeti.timer(verbose=False)
+        def wait():
+            time.sleep(0.01)
+
+        with stdout_string() as buffer:
+            wait()
+
+        msg = buffer.getvalue()
+        self.assertEqual(msg, "")
