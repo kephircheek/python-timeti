@@ -11,7 +11,7 @@ def serializer(sw: timeti.Stopwatch, name: str, i: int = None):
         print(f"[{name}] whole loop {sw.clockface}")
 
 
-for sw, inx in timeti.totime(range(12), "My loop", serializer=serializer):
+for inx in timeti.totime(range(12), "My loop", serializer=serializer):
     time.sleep(0.001)
 
 
