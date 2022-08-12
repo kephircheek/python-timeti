@@ -6,11 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.3.0] - 2022-08-12
+
 ### Added 
 - Silent mode with flag `verbose=False`.
 
 ### Changed 
 - Default return of `totime` wrap. Return Stopwatch instance only with flag `ret_sw=True`.
+
 
 ## [0.2.0] - 2022-08-12
 
