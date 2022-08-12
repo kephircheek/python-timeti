@@ -47,12 +47,12 @@ def timing(name: str = None, serializer: Callable = None):
     serializer(sw, name)
 
 
-def totime(items, name: str = None, serializer: Callable = None):
+def totime(items, name: str = None, serializer: Callable = None, ret_sw: bool = False):
     """Serialize elapsed time of iteration."""
     serializer = serializer or _loop_serializer
     sw = Stopwatch()
     for i, item in enumerate(items):
-        yield sw, item
+        yield (sw, item) if ret_sw else item
         sw.lap()
         with sw.paused():
             serializer(sw, name, i)
