@@ -1,10 +1,21 @@
 [project]
 name = "timeti"
 description = "Serialize elapsed time of functions, loops and code blocks."
-version = "0.1.0"
+version = "0.1.1"
 authors = [
     { name = "Ilia Lazarev", email = "the.ilia.lazarev@gmail.com" }
 ]
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/kephircheek/elapsed-time-logger"
 
 [project.optional-dependencies]
 dev = [
