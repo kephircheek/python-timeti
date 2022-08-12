@@ -3,7 +3,7 @@ import time
 import timeti
 
 
-def serializer(sw: timeti.Stopwatch, name: str):
+def serializer(sw: timeti.Stopwatch, name: str, verbose: bool = True):
     print(f"[{name}] block {sw.clockface}")
 
 

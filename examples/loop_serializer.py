@@ -3,12 +3,13 @@ import time
 import timeti
 
 
-def serializer(sw: timeti.Stopwatch, name: str, i: int = None):
-    if i is not None:
-        lap = sw.laps[-1]
-        print(f"[{name}] iter={i:03} {lap}")
-    else:
-        print(f"[{name}] whole loop {sw.clockface}")
+def serializer(sw: timeti.Stopwatch, name: str, i: int = None, verbose: bool = True):
+    if verbose:
+        if i is not None:
+            lap = sw.laps[-1]
+            print(f"[{name}] iter={i:03} {lap}")
+        else:
+            print(f"[{name}] whole loop {sw.clockface}")
 
 
 for inx in timeti.totime(range(12), "My loop", serializer=serializer):
