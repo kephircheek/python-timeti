@@ -2,9 +2,9 @@
 Serialize elapsed time of functions, loops and code blocks.
 
 ![test](https://github.com/kephircheek/elapsed-time-logger/actions/workflows/main.yml/badge.svg)
+[![PyPI version](https://badge.fury.io/py/timeti.svg)](https://badge.fury.io/py/timeti)
 [![license: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-
 
 ### Experience
 
@@ -52,21 +52,25 @@ pip install -e ".[dev]"
 
 ### Run linters
 
-- Run [black](https://github.com/psf/black) - code formatter
+- Format Python code with [black](https://github.com/psf/black)
   ```
   python -m black .
   ```
 
-- Run [mypy](http://mypy-lang.org/) - static type checker
+- Check types with [mypy](http://mypy-lang.org/)
   ```
   python -m mypy .
   ```
 
-- Run [isort](https://pycqa.github.io/isort/) - library to sort imports alphabetically
+- Sort imports alphabetically with [isort](https://pycqa.github.io/isort/)
   ```
   python -m isort .
   ```
   
+- Analyze Python docstring with [pydocstyle](http://www.pydocstyle.org/en/stable/) 
+  ```
+  python -m pydocstyle .
+  ```
 
 ### Run tests  
 
