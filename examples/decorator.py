@@ -3,7 +3,7 @@ import time
 import timeti
 
 
-@timeti.timer()
+@timeti.profiler()
 def wait(t):
     time.sleep(t)
 

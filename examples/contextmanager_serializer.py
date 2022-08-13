@@ -7,7 +7,7 @@ def serializer(sw: timeti.Stopwatch, name: str, verbose: bool = True):
     print(f"[{name}] block {sw.clockface}")
 
 
-with timeti.timing("My context manager", serializer=serializer) as sw:
+with timeti.profiler("My context manager", serializer=serializer) as sw:
     time.sleep(0.1)
 
 # ------------- stdout -------------
