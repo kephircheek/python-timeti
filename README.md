@@ -6,6 +6,43 @@ Serialize elapsed time of functions, loops and code blocks.
 [![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 
+### Experience
+
+### Install 
+```
+pip install timeti
+```
+
+### Usage
+- Profile function with decorator
+  ```python
+  >>> @timeti.profiler
+  ... def ultimative_question(*args, **kwargs):
+  ...     sum(range(100_000))
+  ... 
+  >>> ultimative_question()
+  Elapsed time of 'ultimative_question' function: 4 ms
+  ```
+
+- Profile loop with wrap
+  ```python
+  >>> for i in timeti.profiler(range(2)):
+  ...     _ = sum(range(100_000))
+  ... 
+  Elapsed time of loop iteration 0: 4 ms
+  Elapsed time of loop iteration 1: 3 ms
+  Elapsed time of loop: 8 ms
+  ```
+
+- Profile code blocks with context manager 
+  ```python
+  >>> with timeti.profiler():
+  ...     _ = sum(range(100_000))
+  ... 
+  Elapsed time of block: 5 ms
+  ```
+
+
 ## Development
 
 ### Install 
