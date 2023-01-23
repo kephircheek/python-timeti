@@ -19,11 +19,11 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = [
-    "mypy",
-    "isort[colors]",
-    "black",
-    "pydocstyle",
-    "toml",
+    "mypy==0.991",
+    "isort[colors]==5.11.4",
+    "black==22.12.0",
+    "pydocstyle==6.3.0",
+    "toml==0.10.2",
 ]
 
 [tool.black]
