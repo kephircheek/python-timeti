@@ -19,10 +19,10 @@ class profiler:
         self,
         something: Any = None,
         /,
-        name: str = None,
+        name: Optional[str] = None,
         *,
         verbose: bool = True,
-        serializer: Callable = None,
+        serializer: Optional[Callable[[Stopwatch, str, bool], None]] = None,
         ret_sw: bool = False,
     ):
         self._something: Any = something
