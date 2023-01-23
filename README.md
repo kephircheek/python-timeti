@@ -1,7 +1,7 @@
 # timeti
 Serialize elapsed time of functions, loops and code blocks.
 
-![test](https://github.com/kephircheek/elapsed-time-logger/actions/workflows/main.yml/badge.svg)
+![test](https://github.com/kephircheek/python-timeti/actions/workflows/main.yml/badge.svg)
 [![PyPI version](https://badge.fury.io/py/timeti.svg)](https://badge.fury.io/py/timeti)
 [![license: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)

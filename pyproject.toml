@@ -15,7 +15,7 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/kephircheek/elapsed-time-logger"
+"Homepage" = "https://github.com/kephircheek/python-timeti"
 
 [project.optional-dependencies]
 dev = [
